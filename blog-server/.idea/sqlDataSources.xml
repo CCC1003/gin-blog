@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="fa0ec0e1-8a1f-4cc3-82cf-f73e2a598d52" name="gvb_db@localhost Mapping">
+      <data-sources db="dcca2d1e-045d-4b92-9a0f-06977185fcac" />
+      <scope>
+        <node kind="schema" qname="gvb_db" />
+      </scope>
+    </mapping>
+  </component>
+</project>
