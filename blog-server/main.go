@@ -19,8 +19,6 @@ func main() {
 	core.InitConf()
 	//初始化日志
 	global.Logger = core.InitLogger("logrus/log", "cong")
-	global.Logger.Infof("iii")
-	global.Logger.Fatalf("sss")
 	//连接数据库
 	global.DB = core.InitGorm()
 	//命令行参数绑定

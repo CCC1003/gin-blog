@@ -1,0 +1,4 @@
+[gvb][2023-06-21 21:55:53] [36m[info][0m main.go:33 main.main gvb-server运行在：0.0.0.0:8080
+[gvb][2023-06-21 21:55:53] [31m[fatal][0m main.go:36 main.main listen tcp 0.0.0.0:8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+[gvb][2023-06-21 21:55:53] [36m[info][0m main.go:33 main.main gvb-server运行在：0.0.0.0:8080
+[gvb][2023-06-21 21:55:53] [31m[fatal][0m main.go:36 main.main listen tcp 0.0.0.0:8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.

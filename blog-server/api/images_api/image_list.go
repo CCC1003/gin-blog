@@ -1,7 +1,6 @@
 package images_api
 
 import (
-	"Blog/global"
 	"Blog/models"
 	"Blog/models/res"
 	"Blog/service/common"
@@ -23,7 +22,6 @@ func (ImagesApi) ImageListView(c *gin.Context) {
 		res.FailWithCode(res.ArgumentError, c)
 		return
 	}
-	global.Logger.Info(&cr)
 	list, count, err := common.ComList(models.BannerModel{}, common.Option{
 		PageInfo: cr,
 		Debug:    true,

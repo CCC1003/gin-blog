@@ -23,5 +23,7 @@ func InitRouter() *gin.Engine {
 	routerGroupApp.ImagesRouter()
 	//广告管理api
 	routerGroupApp.AdvertRouter()
+	//菜单管理
+	routerGroupApp.MenuRouter()
 	return router
 }
