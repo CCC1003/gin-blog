@@ -34,7 +34,7 @@ func Ok(data any, msg string, c *gin.Context) {
 	Result(Success, data, msg, c)
 }
 func OkWithData(data any, c *gin.Context) {
-	Result(Success, data, "成功", c)
+	Result(Success, data, "Success", c)
 }
 func OkWithMessage(msg string, c *gin.Context) {
 	Result(Success, map[string]any{}, msg, c)
@@ -46,7 +46,7 @@ func OkWithList(list any, count int64, c *gin.Context) {
 	}, c)
 }
 func OkWith(c *gin.Context) {
-	Result(Success, map[string]any{}, "成功", c)
+	Result(Success, map[string]any{}, "Success", c)
 }
 func Fail(data any, msg string, c *gin.Context) {
 	Result(Error, data, msg, c)

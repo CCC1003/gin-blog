@@ -21,6 +21,8 @@ func main() {
 	global.Logger = core.InitLogger("logrus/log", "cong")
 	//连接数据库
 	global.DB = core.InitGorm()
+	//连接redis
+	global.Redis = core.ConnectRedis()
 	//命令行参数绑定
 	option := flag.Parse()
 	if flag.IsWebStop(option) {

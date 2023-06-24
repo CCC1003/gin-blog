@@ -1,4 +1,0 @@
-[gvb][2023-06-22 16:51:02] [36m[info][0m main.go:33 main.main gvb-server运行在：0.0.0.0:8080
-[gvb][2023-06-22 16:51:47] [36m[info][0m main.go:33 main.main gvb-server运行在：0.0.0.0:8080
-[gvb][2023-06-22 16:53:04] [31m[error][0m menu_update.go:49 Blog/api/menu_api.MenuApi.MenuUpdateView Error 1054 (42S22): Unknown column 'ImageSortList' in 'field list'
-[gvb][2023-06-22 16:53:06] [31m[error][0m menu_update.go:49 Blog/api/menu_api.MenuApi.MenuUpdateView Error 1054 (42S22): Unknown column 'ImageSortList' in 'field list'
