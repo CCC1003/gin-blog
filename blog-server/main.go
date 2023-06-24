@@ -13,7 +13,6 @@ import (
 // @description API文档
 // @host 127.0.0.01:8080
 // @BasePath /
-
 func main() {
 	//读取配置
 	core.InitConf()

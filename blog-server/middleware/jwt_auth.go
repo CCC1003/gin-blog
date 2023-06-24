@@ -3,6 +3,7 @@ package middleware
 import (
 	"Blog/models/ctype"
 	"Blog/models/res"
+	"Blog/service/redis_ser"
 	"Blog/utils/jwts"
 	"github.com/gin-gonic/gin"
 )
@@ -21,6 +22,12 @@ func JwtAuth() gin.HandlerFunc {
 			c.Abort()
 			return
 		}
+		//判断是否再redis中
+		if redis_ser.CheckLogout(token) {
+			res.FailWithMessage("token已失效", c)
+			c.Abort()
+			return
+		}
 		//登录的用户
 		c.Set("claims", claims)
 	}
@@ -36,6 +43,12 @@ func JwtAdmin() gin.HandlerFunc {
 		claims, err := jwts.ParseToken(token)
 		if err != nil {
 			res.FailWithMessage("token错误", c)
+			c.Abort()
+			return
+		}
+		//判断是否再redis中
+		if redis_ser.CheckLogout(token) {
+			res.FailWithMessage("token已失效", c)
 			c.Abort()
 			return
 		}

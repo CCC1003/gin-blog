@@ -15,6 +15,13 @@ type UserRole struct {
 }
 
 // UserUpdateRoleView 用户权限变更
+// @Tags 用户管理
+// @Summary 用户权限变更
+// @Description 用户权限变更
+// @Param data query UserRole 	false	"用户角色、昵称、id"
+// @Router /api/user_role [put]
+// @Produce json
+// @Success 200 {object} res.Response{data=string} ""
 func (UserApi) UserUpdateRoleView(c *gin.Context) {
 	var cr UserRole
 	err := c.ShouldBindJSON(&cr)

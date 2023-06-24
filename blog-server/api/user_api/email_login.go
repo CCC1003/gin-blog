@@ -14,6 +14,14 @@ type EmailLoginRequest struct {
 	Password string `json:"password" binding:"required" msg:"请输入密码"`
 }
 
+// EmailLoginView  用户邮箱登录
+// @Tags 用户管理
+// @Summary 用户登录
+// @Description 用户登录
+// @Param data query EmailLoginRequest	false	"用户名和密码"
+// @Router /api/email_login [post]
+// @Produce json
+// @Success 200 {object} res.Response{data=jwts.JwtPayLoad} ""
 func (UserApi) EmailLoginView(c *gin.Context) {
 	var cr EmailLoginRequest
 	err := c.ShouldBindJSON(&cr)

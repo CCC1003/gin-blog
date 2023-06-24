@@ -15,6 +15,13 @@ type UpdatePasswordRequest struct {
 }
 
 // UserUpdatePassword 修改登录人的id
+// @Tags 用户管理
+// @Summary 用户更新密码
+// @Description 用户更新密码
+// @Param data query UpdatePasswordRequest 	false	"旧密码和新密码"
+// @Router /api/user_password [put]
+// @Produce json
+// @Success 200 {object} res.Response{data=string} ""
 func (UserApi) UserUpdatePassword(c *gin.Context) {
 	_claims, _ := c.Get("claims")
 	claims := _claims.(*jwts.CustomClaims)

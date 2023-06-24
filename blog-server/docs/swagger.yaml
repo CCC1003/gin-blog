@@ -30,6 +30,33 @@ definitions:
     x-enum-varnames:
     - Local
     - QiNiu
+  ctype.Role:
+    enum:
+    - 1
+    - 2
+    - 3
+    - 4
+    type: integer
+    x-enum-comments:
+      PermissionAdmin: 管理员
+      PermissionDisableUser: 被禁用的用户
+      PermissionUser: 普通登录人
+      PermissionVisitor: 游客
+    x-enum-varnames:
+    - PermissionAdmin
+    - PermissionUser
+    - PermissionVisitor
+    - PermissionDisableUser
+  ctype.SignStatus:
+    enum:
+    - 1
+    - 2
+    - 3
+    type: integer
+    x-enum-varnames:
+    - SignQQ
+    - SignGitee
+    - SignEmail
   image_ser.FileUploadResponse:
     properties:
       file_name:
@@ -58,6 +85,21 @@ definitions:
     required:
     - id
     - name
+    type: object
+  jwts.JwtPayLoad:
+    properties:
+      nick_name:
+        description: 昵称
+        type: string
+      role:
+        description: 权限 1 管理员 2 普通用户 3 游客
+        type: integer
+      user_id:
+        description: 用户id
+        type: integer
+      username:
+        description: 用户名
+        type: string
     type: object
   menu_api.Banner:
     properties:
@@ -205,6 +247,50 @@ definitions:
           type: integer
         type: array
     type: object
+  models.UserModel:
+    properties:
+      IP:
+        description: ip地址
+        type: string
+      addr:
+        description: 地址
+        type: string
+      avatar_id:
+        description: 头像id
+        type: string
+      created_at:
+        description: 创建时间
+        type: string
+      email:
+        description: 邮箱
+        type: string
+      id:
+        description: 主键id
+        type: integer
+      nick_name:
+        description: 昵称
+        type: string
+      role:
+        allOf:
+        - $ref: '#/definitions/ctype.Role'
+        description: //权限 1 管理员 2 普通用户 3 游客
+      sign_status:
+        allOf:
+        - $ref: '#/definitions/ctype.SignStatus'
+        description: 注册来源
+      tel:
+        description: 用户名
+        type: string
+      token:
+        description: 其他平台的唯一id
+        type: string
+      update_at:
+        description: 更新时间
+        type: string
+      user_name:
+        description: 用户名
+        type: string
+    type: object
   res.ListResponse-models_AdvertModel:
     properties:
       count:
@@ -333,6 +419,33 @@ paths:
       summary: 更新广告
       tags:
       - 广告管理
+  /api/email_login:
+    post:
+      description: 用户登录
+      parameters:
+      - in: query
+        name: password
+        required: true
+        type: string
+      - in: query
+        name: user_name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/res.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/jwts.JwtPayLoad'
+              type: object
+      summary: 用户登录
+      tags:
+      - 用户管理
   /api/image_names:
     get:
       description: 图片名称列表
@@ -636,4 +749,110 @@ paths:
       summary: 修改配置信息
       tags:
       - 系统配置
+  /api/user_password:
+    put:
+      description: 用户更新密码
+      parameters:
+      - description: 旧密码
+        in: query
+        name: old_pwd
+        required: true
+        type: string
+      - description: 新密码
+        in: query
+        name: pwd
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/res.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 用户更新密码
+      tags:
+      - 用户管理
+  /api/user_role:
+    put:
+      description: 用户权限变更
+      parameters:
+      - description: 防止用户昵称非法，管理员有能力修改
+        in: query
+        name: nick_name
+        type: string
+      - enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        in: query
+        name: role
+        required: true
+        type: integer
+        x-enum-comments:
+          PermissionAdmin: 管理员
+          PermissionDisableUser: 被禁用的用户
+          PermissionUser: 普通登录人
+          PermissionVisitor: 游客
+        x-enum-varnames:
+        - PermissionAdmin
+        - PermissionUser
+        - PermissionVisitor
+        - PermissionDisableUser
+      - in: query
+        name: user_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/res.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 用户权限变更
+      tags:
+      - 用户管理
+  /api/users:
+    get:
+      description: 用户列表
+      parameters:
+      - in: query
+        name: key
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: page
+        type: integer
+      - in: query
+        name: sort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/res.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.UserModel'
+              type: object
+      summary: 用户列表
+      tags:
+      - 用户管理
 swagger: "2.0"
