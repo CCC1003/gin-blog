@@ -49,12 +49,12 @@ qi_niu:
   prefix: "gvb"
   size: 5
 email:
-  host: xxx
-  port: 0
-  user1: xxx
-  password: ""
-  default_from_email: xxx
-  user_ssl: false
+  host: "smtp.qq.com"
+  port: 465
+  user: 1623156452@qq.com
+  password: "zpsjzrrfzejqfaae"
+  default_from_email: cong
+  user_ssl: true
   user_tls: false
 jwy:
   secret: ""

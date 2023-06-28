@@ -4,8 +4,8 @@ import (
 	"Blog/global"
 	"Blog/models"
 	"Blog/models/res"
-	"Blog/utils"
 	"Blog/utils/jwts"
+	"Blog/utils/pwd"
 	"github.com/gin-gonic/gin"
 )
 
@@ -37,7 +37,7 @@ func (UserApi) EmailLoginView(c *gin.Context) {
 		return
 	}
 	//校验密码
-	isCheck := utils.ComparePasswords(userModel.Password, cr.Password)
+	isCheck := pwd.ComparePasswords(userModel.Password, cr.Password)
 	if !isCheck {
 		global.Logger.Warn("用户名密码错误")
 		res.FailWithMessage("用户名或密码错误", c)

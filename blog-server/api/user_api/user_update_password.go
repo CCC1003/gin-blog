@@ -4,8 +4,8 @@ import (
 	"Blog/global"
 	"Blog/models"
 	"Blog/models/res"
-	"Blog/utils"
 	"Blog/utils/jwts"
+	"Blog/utils/pwd"
 	"github.com/gin-gonic/gin"
 )
 
@@ -37,11 +37,11 @@ func (UserApi) UserUpdatePassword(c *gin.Context) {
 		return
 	}
 	// 判断密码是否一致
-	if !utils.ComparePasswords(user.Password, cr.OldPwd) {
+	if !pwd.ComparePasswords(user.Password, cr.OldPwd) {
 		res.FailWithMessage("密码错误", c)
 		return
 	}
-	hashPwd := utils.HashAndSalt(cr.Pwd)
+	hashPwd := pwd.HashAndSalt(cr.Pwd)
 	err = global.DB.Model(&user).Update("password", hashPwd).Error
 	if err != nil {
 		global.Logger.Error(err)
