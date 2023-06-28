@@ -27,5 +27,7 @@ func InitRouter() *gin.Engine {
 	routerGroupApp.MenuRouter()
 	//用户管理
 	routerGroupApp.UserRouter()
+	//标签管理
+	routerGroupApp.TagRouter()
 	return router
 }
